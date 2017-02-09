@@ -49,9 +49,10 @@ echo "answer-6: $answer_6"
 longest="$datasets/bed/genes.hg19.bed.gz"
 
 answer_7=$(zless $longest \
-    |cut -f4 \
-    |awk '{print length (), $0 |"sort -n"}' \
-    |tail -n1)
+    |awk '{print $4, $3 -$2}' \
+    |sort -k2n \
+    |tail -n1 \
+    |cut -f1 -d " ")
 
 echo "answer-7: $answer_7"
 
@@ -74,7 +75,8 @@ inverval="$datasets/bed/lamina.bed"
 
 answer_10=$(awk '{print $1, $3 - $2}' $inverval \
     |sort -k2n \
-    |tail -n1)
+    |tail -n1 \
+    |cut -f1 -d " ")
 
 echo "answer-10: $answer_10"
 
